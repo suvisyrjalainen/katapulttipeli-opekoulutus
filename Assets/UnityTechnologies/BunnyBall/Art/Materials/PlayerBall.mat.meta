@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2d3619870b987e24d863ab9ef3a01ede
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 247620
+  packageName: 3D Bunny Ball | Certification Courseware
+  packageVersion: 1.1
+  assetPath: Assets/UnityTechnologies/BunnyBall/Art/Materials/PlayerBall.mat
+  uploadId: 564433
