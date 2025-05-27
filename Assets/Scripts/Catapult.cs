@@ -1,5 +1,6 @@
 using UnityEngine;
-
+using UnityEngine.UI; // muista tämä!
+using TMPro;
 public class Catapult : MonoBehaviour
 {
 
@@ -8,7 +9,14 @@ public class Catapult : MonoBehaviour
 
     private Quaternion bunnyStartPointRotation; // Hahmon transform
 
+    public Slider forceSlider;
+    public TextMeshProUGUI forceValueText; // UI-elementti, johon voima näytetään
     public float launchForce = 15f; // Voima, jolla hahmo ammutaan
+
+    public Slider liftSlider;
+    public float verticalLift = 0.5f;
+
+     public TextMeshProUGUI liftValueText; // UI-elementti, johon voima näytetään
 
     //Tämä ampuu hahmon suoraan eteenpäin
     public Vector3 launchDirection = new Vector3(1, 1, 0); // Lentosuunnan määrittely
@@ -27,12 +35,33 @@ public class Catapult : MonoBehaviour
     void Start()
     {
         bunnyStartPointRotation = characterRigidbody.transform.rotation;
+
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         HandleRotation();
+        if (forceValueText != null)
+        {
+            forceValueText.text = "Voima: " + Mathf.RoundToInt(launchForce);
+        }
+        if (liftValueText != null)
+        {
+            liftValueText.text = "Suunta: " + verticalLift;
+        }
+
+        if (forceSlider != null)
+        {
+            launchForce = forceSlider.value;
+        }
+
+        if (liftSlider != null)
+        {
+            verticalLift = liftSlider.value;
+        }
+
         // Kun pelaaja painaa "space" näppäintä, ammutaan hahmo
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -54,7 +83,7 @@ public class Catapult : MonoBehaviour
         characterRigidbody.isKinematic = false; // Anna fysiikan vaikuttaa
         characterRigidbody.transform.parent = null; // Irrota pupu katapultista ennen lentoa
         catapultAnimator.SetTrigger("Launch"); // Käynnistä animaatio
-        launchDirection = turret.forward + Vector3.up * 0.6f; // hieman ylös + eteen
+        launchDirection = turret.forward + Vector3.up * verticalLift; // hieman ylös + eteen
         characterRigidbody.AddForce(launchDirection.normalized * launchForce, ForceMode.Impulse);
     }
 
